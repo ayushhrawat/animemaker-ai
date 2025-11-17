@@ -53,24 +53,16 @@
   font-size: 18px;
 }
 
-.preview-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .character-display {
   position: relative;
   width: 100%;
-  max-width: 200px; /* Limit maximum width */
-  height: 200px; /* Fixed height for consistent preview */
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--bg-secondary);
   border-radius: 12px;
   overflow: hidden;
-  margin: 0 auto;
 }
 
 .character-part {
@@ -97,8 +89,7 @@
   }
   
   .character-display {
-    max-width: 160px;
-    height: 160px;
+    height: 120px;
   }
 }
 
@@ -113,8 +104,7 @@
   }
   
   .character-display {
-    max-width: 140px;
-    height: 140px;
+    height: 100px;
   }
 }
 

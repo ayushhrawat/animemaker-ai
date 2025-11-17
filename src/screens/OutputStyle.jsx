@@ -60,6 +60,7 @@ const OutputStyle = () => {
     const tempVideo = document.createElement('video');
     tempVideo.src = getVideoSource();
     tempVideo.muted = true;
+    tempVideo.crossOrigin = "anonymous";
     
     tempVideo.addEventListener('loadedmetadata', () => {
       // Seek to a specific time to capture a frame
@@ -67,21 +68,36 @@ const OutputStyle = () => {
     });
     
     tempVideo.addEventListener('seeked', () => {
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-      
-      // Set canvas dimensions
-      canvas.width = 320;
-      canvas.height = 180;
-      
-      // Draw video frame to canvas
-      context.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
-      
-      // Convert to data URL
-      const dataURL = canvas.toDataURL('image/png');
-      setThumbnail(dataURL);
-      
-      // Clean up
+      // Small delay to ensure frame is ready
+      setTimeout(() => {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        
+        // Set canvas dimensions to match video aspect ratio
+        canvas.width = tempVideo.videoWidth || 320;
+        canvas.height = tempVideo.videoHeight || 180;
+        
+        // Draw video frame to canvas
+        try {
+          context.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
+          
+          // Convert to data URL
+          const dataURL = canvas.toDataURL('image/png');
+          setThumbnail(dataURL);
+        } catch (error) {
+          console.error('Error generating thumbnail:', error);
+          // Fallback to a placeholder
+          setThumbnail(null);
+        }
+        
+        // Clean up
+        tempVideo.remove();
+      }, 100);
+    });
+    
+    tempVideo.addEventListener('error', (error) => {
+      console.error('Error loading video for thumbnail:', error);
+      setThumbnail(null);
       tempVideo.remove();
     });
   };
@@ -128,8 +144,9 @@ const OutputStyle = () => {
                   style={{ width: '100%', height: 'auto', maxHeight: '200px', borderRadius: '12px', marginBottom: '15px', objectFit: 'cover' }}
                 />
               ) : (
-                <div style={{ width: '100%', height: '200px', backgroundColor: '#f0f0f0', borderRadius: '12px', marginBottom: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <div>Loading thumbnail...</div>
+                <div style={{ width: '100%', height: '200px', backgroundColor: '#f0f0f0', borderRadius: '12px', marginBottom: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                  <div style={{ fontSize: '48px', marginBottom: '10px' }}>🎬</div>
+                  <div>Video Preview</div>
                 </div>
               )}
               <div style={{fontSize: '16px', color: 'var(--text-secondary)', textAlign: 'center'}}>

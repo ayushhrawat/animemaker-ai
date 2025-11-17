@@ -19,6 +19,7 @@ const Preview = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -89,6 +90,10 @@ const Preview = () => {
         videoRef.current.play();
       }
       setIsPlaying(!isPlaying);
+      // Show video when playing, thumbnail when paused
+      if (!isPlaying) {
+        setShowVideo(true);
+      }
     }
   };
 
@@ -143,26 +148,39 @@ const Preview = () => {
           <div className="player-screen">
             <div className="anime-preview">
               <div className="preview-placeholder">
-                {thumbnail ? (
-                  <img 
-                    src={thumbnail} 
-                    alt="Video thumbnail" 
-                    style={{ width: '100%', height: 'auto', maxHeight: '300px', borderRadius: '12px', objectFit: 'cover' }}
-                  />
-                ) : (
+                {showVideo || isPlaying ? (
                   <video 
                     ref={videoRef}
                     src={getVideoSource()}
-                    style={{ width: '100%', height: 'auto', maxHeight: '300px', borderRadius: '12px', display: 'none' }}
+                    style={{ width: '100%', height: 'auto', maxHeight: '300px', borderRadius: '12px' }}
                     onPlay={() => setIsPlaying(true)}
                     onPause={() => setIsPlaying(false)}
-                    onEnded={() => setIsPlaying(false)}
+                    onEnded={() => {
+                      setIsPlaying(false);
+                      setShowVideo(false);
+                    }}
                     onLoadedMetadata={handleLoadedMetadata}
                     onTimeUpdate={handleTimeUpdate}
                     onError={handleVideoError}
                     onLoadStart={handleVideoLoadStart}
                     onCanPlay={handleVideoCanPlay}
+                    autoPlay
                   />
+                ) : thumbnail ? (
+                  <div onClick={() => setShowVideo(true)} style={{ cursor: 'pointer' }}>
+                    <img 
+                      src={thumbnail} 
+                      alt="Video thumbnail" 
+                      style={{ width: '100%', height: 'auto', maxHeight: '300px', borderRadius: '12px', objectFit: 'cover' }}
+                    />
+                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                      <div style={{ fontSize: '64px' }}>▶️</div>
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ width: '100%', height: '300px', backgroundColor: '#f0f0f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div>Loading video...</div>
+                  </div>
                 )}
                 <div style={{marginTop: '15px', fontSize: '16px', color: 'var(--text-secondary)'}}>
                   {currentVideo === 'anime_demo' ? 'Anime Style Demo' : 'Realistic Style Demo'}

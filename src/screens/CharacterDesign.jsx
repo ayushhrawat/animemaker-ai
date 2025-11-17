@@ -364,7 +364,23 @@ const CharacterDesign = () => {
                       e.target.style.display = 'none';
                     }}
                   />
-                ) : null;
+                ) : (
+                  <div 
+                    key={partType}
+                    className="character-part"
+                    style={{ 
+                      zIndex: partTypes.indexOf(partType),
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '14px',
+                      color: 'var(--text-secondary)',
+                      backgroundColor: 'var(--bg-secondary)'
+                    }}
+                  >
+                    {partType}
+                  </div>
+                );
               })}
             </div>
           </div>

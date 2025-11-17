@@ -48,19 +48,19 @@ const MusicEffects = () => {
   }, []);
 
   const musicTracks = [
-    { name: 'Epic Adventure', mood: '⚔️ Action', duration: '3:45', file: '/src/music/epic_adventure.mp3' },
-    { name: 'Gentle Breeze', mood: '🌸 Calm', duration: '2:30', file: '/src/music/gentle_breeze.mp3' },
-    { name: 'Dramatic Tension', mood: '😰 Suspense', duration: '4:15', file: '/src/music/dramatic_tension.mp3' },
-    { name: 'Happy Moments', mood: '😊 Upbeat', duration: '3:00', file: '/src/music/happy_moments.mp3' },
+    { name: 'Epic Adventure', mood: '⚔️ Action', duration: '3:45', file: '../music/epic_adventure.mp3' },
+    { name: 'Gentle Breeze', mood: '🌸 Calm', duration: '2:30', file: '../music/gentle_breeze.mp3' },
+    { name: 'Dramatic Tension', mood: '😰 Suspense', duration: '4:15', file: '../music/dramatic_tension.mp3' },
+    { name: 'Happy Moments', mood: '😊 Upbeat', duration: '3:00', file: '../music/happy_moments.mp3' },
   ];
 
   const soundEffects = [
-    { name: 'Explosion', emoji: '💥', file: '/src/sound-effects/explosion.mp3' },
-    { name: 'Sword Clash', emoji: '⚔️', file: '/src/sound-effects/sword.mp3' },
-    { name: 'Water', emoji: '🌊', file: '/src/sound-effects/water.mp3' },
-    { name: 'Wind', emoji: '🌬️', file: '/src/sound-effects/wind.mp3' },
-    { name: 'Fire', emoji: '🔥', file: '/src/sound-effects/fire.mp3' },
-    { name: 'Lightning', emoji: '⚡', file: '/src/sound-effects/lightning.mp3' }
+    { name: 'Explosion', emoji: '💥', file: '../sound-effects/explosion.mp3' },
+    { name: 'Sword Clash', emoji: '⚔️', file: '../sound-effects/sword.mp3' },
+    { name: 'Water', emoji: '🌊', file: '../sound-effects/water.mp3' },
+    { name: 'Wind', emoji: '🌬️', file: '../sound-effects/wind.mp3' },
+    { name: 'Fire', emoji: '🔥', file: '../sound-effects/fire.mp3' },
+    { name: 'Lightning', emoji: '⚡', file: '../sound-effects/lightning.mp3' }
   ];
 
   const playMusicSample = (musicFile, trackName) => {

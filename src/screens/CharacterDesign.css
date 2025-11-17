@@ -26,10 +26,13 @@
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  padding: 5px; /* Minimal padding */
-  max-width: 200px;
+  padding: 12px 16px; /* Same padding as character tabs */
+  width: 80px; /* Same width as character tabs */
+  height: 40px; /* Same height as character tabs */
   margin: 0 auto;
-  height: 50px; /* Fixed height to make it shorter */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .character-preview::before {
@@ -46,15 +49,13 @@
 .character-display {
   position: relative;
   width: 100%;
-  max-width: 80px;
-  height: 20px; /* Much smaller height */
+  height: 20px; /* Keep character display small */
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   overflow: hidden;
-  margin: 0 auto;
   backdrop-filter: blur(10px);
 }
 
@@ -73,27 +74,25 @@
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .character-preview {
-    padding: 4px;
-    max-width: 160px;
-    height: 40px; /* Fixed height for tablets */
+    padding: 10px 14px;
+    width: 70px;
+    height: 36px;
   }
   
   .character-display {
-    max-width: 70px;
-    height: 15px;
+    height: 16px;
   }
 }
 
 @media (max-width: 480px) {
   .character-preview {
-    padding: 3px;
-    max-width: 140px;
-    height: 35px; /* Fixed height for mobile */
+    padding: 8px 12px;
+    width: 60px;
+    height: 32px;
   }
   
   .character-display {
-    max-width: 60px;
-    height: 12px;
+    height: 14px;
   }
 }
 

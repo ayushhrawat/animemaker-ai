@@ -26,9 +26,10 @@
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  padding: 8px; /* Much smaller padding to reduce height */
+  padding: 5px; /* Minimal padding */
   max-width: 200px;
   margin: 0 auto;
+  height: 50px; /* Fixed height to make it shorter */
 }
 
 .character-preview::before {
@@ -42,18 +43,11 @@
   transform: rotate(30deg);
 }
 
-.character-preview h3 {
-  margin-bottom: 6px; /* Much smaller margin */
-  color: white;
-  font-size: 14px;
-  text-align: center;
-}
-
 .character-display {
   position: relative;
   width: 100%;
   max-width: 80px;
-  height: 30px; /* Reduced to one-third of previous height (50px -> 30px) */
+  height: 20px; /* Much smaller height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,35 +73,27 @@
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .character-preview {
-    padding: 6px;
+    padding: 4px;
     max-width: 160px;
-  }
-  
-  .character-preview h3 {
-    font-size: 12px;
-    margin-bottom: 4px;
+    height: 40px; /* Fixed height for tablets */
   }
   
   .character-display {
     max-width: 70px;
-    height: 25px; /* Reduced to one-third of previous height */
+    height: 15px;
   }
 }
 
 @media (max-width: 480px) {
   .character-preview {
-    padding: 5px;
+    padding: 3px;
     max-width: 140px;
-  }
-  
-  .character-preview h3 {
-    font-size: 11px;
-    margin-bottom: 3px;
+    height: 35px; /* Fixed height for mobile */
   }
   
   .character-display {
     max-width: 60px;
-    height: 20px; /* Reduced to one-third of previous height */
+    height: 12px;
   }
 }
 

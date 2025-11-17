@@ -346,8 +346,7 @@ const CharacterDesign = () => {
         </div>
 
         {/* Character Preview */}
-        <div className="character-preview card">
-          <h3>Character Preview</h3>
+        <div className="character-preview">
           <div className="preview-container">
             <div className="character-display">
               {partTypes.map(partType => {
@@ -373,12 +372,11 @@ const CharacterDesign = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '14px',
-                      color: 'var(--text-secondary)',
-                      backgroundColor: 'var(--bg-secondary)'
+                      fontSize: '10px',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)'
                     }}
                   >
-                    {partType}
                   </div>
                 );
               })}

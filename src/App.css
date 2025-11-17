@@ -1,0 +1,415 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Light Theme - Light Blue */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f9fc;
+  --bg-gradient-start: #ffffff;
+  --bg-gradient-end: #f0f4f8;
+  --text-primary: #000000;
+  --text-secondary: #1a1a1a;
+  --accent-primary: #21538B;
+  --accent-secondary: #1a4470;
+  --accent-light: #7CB8F7;
+  --card-bg: #7CB8F7;
+  --login-box-bg: #7CB8F7;
+  --shadow: rgba(33, 83, 139, 0.15);
+  --border: #e2e8f0;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e0;
+  --input-text: #000000;
+  --success: #48bb78;
+  --warning: #ed8936;
+  --danger: #f56565;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1a202c;
+  --bg-secondary: #2d3748;
+  --bg-gradient-start: #1a202c;
+  --bg-gradient-end: #2d3748;
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --accent-primary: #7c3aed;
+  --accent-secondary: #9f7aea;
+  --accent-light: #d6bcfa;
+  --card-bg: #2d3748;
+  --login-box-bg: #2d3748;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --border: #4a5568;
+  --input-bg: #374151;
+  --input-border: #4a5568;
+  --input-text: #000000;
+  --success: #68d391;
+  --warning: #f6ad55;
+  --danger: #fc8181;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  max-width: 100vw;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Utility Classes */
+.gradient-text {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.gradient-bg {
+  background: var(--accent-primary);
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Light mode shadows for cards */
+[data-theme="light"] .card {
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+/* Dark mode glow for cards */
+[data-theme="dark"] .card {
+  box-shadow: 0 0 15px rgba(124, 184, 247, 0.2);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Light mode shadows for cards on hover */
+[data-theme="light"] .card:hover {
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Dark mode glow for cards on hover */
+[data-theme="dark"] .card:hover {
+  box-shadow: 0 0 20px rgba(124, 184, 247, 0.3);
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: #21538B;
+  color: white;
+  border: none;
+}
+
+/* Light mode shadows for primary buttons */
+[data-theme="light"] .btn-primary {
+  box-shadow: 0 4px 12px rgba(33, 83, 139, 0.25);
+}
+
+/* Dark mode glow for primary buttons */
+[data-theme="dark"] .btn-primary {
+  box-shadow: 0 0 15px rgba(33, 83, 139, 0.4);
+}
+
+.btn-primary:hover {
+  background: #1a4470;
+  transform: translateY(-2px);
+}
+
+/* Light mode shadows for primary buttons on hover */
+[data-theme="light"] .btn-primary:hover {
+  box-shadow: 0 6px 16px rgba(33, 83, 139, 0.35);
+}
+
+/* Dark mode glow for primary buttons on hover */
+[data-theme="dark"] .btn-primary:hover {
+  box-shadow: 0 0 20px rgba(33, 83, 139, 0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+/* Light mode shadows for secondary buttons */
+[data-theme="light"] .btn-secondary {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode glow for secondary buttons */
+[data-theme="dark"] .btn-secondary {
+  box-shadow: 0 0 10px rgba(124, 184, 247, 0.2);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent-primary);
+}
+
+.input-field {
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 2px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--input-text, var(--text-primary)) !important;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.input-field::placeholder {
+  color: #6b7280;
+}
+
+[data-theme="light"] .input-field {
+  color: var(--input-text, #000000) !important;
+}
+
+[data-theme="dark"] .input-field {
+  color: var(--input-text, #000000) !important;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #21538B;
+  box-shadow: 0 0 0 4px rgba(33, 83, 139, 0.1), 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Dark mode glow for input fields on focus */
+[data-theme="dark"] .input-field:focus {
+  box-shadow: 0 0 0 4px rgba(124, 184, 247, 0.3), 0 0 15px rgba(124, 184, 247, 0.2);
+}
+
+.floating-shapes {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-shapes .shape {
+  position: absolute;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .card {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .input-field {
+    padding: 10px 14px;
+    font-size: 14px;
+    color: var(--input-text, var(--text-primary)) !important;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+}
+
+/* Utility Classes */
+.screen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.screen-header h2 {
+  font-size: 22px;
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .screen-header h2 {
+    font-size: 20px;
+  }
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 0;
+  background: #7CB8F7;
+  border-top: 1px solid rgba(124, 184, 247, 0.5);
+  z-index: 1000;
+}
+
+/* Light mode shadows for bottom nav */
+[data-theme="light"] .bottom-nav {
+  box-shadow: 0 -2px 10px rgba(33, 83, 139, 0.15);
+}
+
+/* Dark mode glow for bottom nav */
+[data-theme="dark"] .bottom-nav {
+  box-shadow: 0 0 20px rgba(33, 83, 139, 0.3);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.nav-item.active {
+  background: rgba(33, 83, 139, 0.1);
+  color: #21538B;
+}
+
+.nav-icon {
+  font-size: 20px;
+}
+
+/* Add padding to all screens to accommodate bottom nav */
+.home-container,
+.character-container,
+.scene-container,
+.voiceover-container,
+.music-container,
+.preview-container,
+.profile-container,
+.output-container {
+  padding-bottom: 70px;
+}
+
+/* Remove padding from action buttons since bottom nav handles it */
+/* Only apply to action buttons that are not specifically styled for fixed positioning */
+.action-buttons:not(.story-container .action-buttons) {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  padding: 16px 0;
+  background: transparent;
+  border-top: none;
+  box-shadow: none;
+  display: flex;
+  gap: 12px;
+}
+
+.action-buttons:not(.story-container .action-buttons) button {
+  flex: 1;
+}

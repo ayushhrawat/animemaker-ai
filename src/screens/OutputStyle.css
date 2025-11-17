@@ -1,0 +1,162 @@
+.output-container {
+  min-height: 100vh;
+  padding: 16px;
+  background: transparent;
+  padding-bottom: 180px; /* Increased padding to ensure buttons are visible */
+  position: relative; /* Ensure proper positioning context */
+}
+
+.screen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.screen-header h2 {
+  font-size: 20px;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.output-content {
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.output-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* Remove fixed height to allow natural flow */
+  min-height: calc(100vh - 200px); /* Adjust based on header and padding */
+}
+
+.preview-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+}
+
+.preview-section h3 {
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.preview-video {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.video-icon {
+  font-size: 64px;
+  margin-bottom: 15px;
+}
+
+.resolution-section {
+  padding: 20px;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+}
+
+.resolution-section h3 {
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.stack-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--bg-primary);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.option-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.option-btn.active {
+  border-color: #21538B;
+  background: #21538B;
+  color: white;
+}
+
+.option-label {
+  flex: 1;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  padding: 20px 0 80px 0; /* Increased bottom padding to move buttons up */
+  /* Position relative to ensure it's above the nav bar */
+  position: relative;
+  z-index: 10;
+}
+
+.download-btn, .share-btn {
+  flex: 1;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .output-container {
+    padding: 12px;
+    padding-bottom: 180px; /* Increased padding on mobile */
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    padding: 20px 0 80px 0; /* Increased bottom padding on mobile */
+  }
+  
+  .download-btn, .share-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .output-container {
+    padding: 10px;
+    padding-bottom: 180px; /* Increased padding on small screens */
+  }
+  
+  .preview-section, .resolution-section {
+    padding: 15px;
+  }
+  
+  .option-btn {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+}

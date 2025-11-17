@@ -1,0 +1,148 @@
+.preview-container {
+  min-height: 100vh;
+  padding: 16px;
+  background: transparent;
+}
+
+.preview-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+
+.video-player {
+  margin-bottom: 30px;
+}
+
+.player-screen {
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px var(--shadow);
+}
+
+.anime-preview {
+  aspect-ratio: 16 / 9;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.preview-placeholder {
+  text-align: center;
+}
+
+.play-icon {
+  width: 80px;
+  height: 80px;
+  background: #21538B;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.play-icon:hover {
+  transform: scale(1.1);
+  background: #1a4470;
+}
+
+.player-controls {
+  padding: 20px;
+  background: var(--bg-secondary);
+}
+
+.timeline {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.timeline-progress {
+  height: 100%;
+  background: #21538B;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.control-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.control-btn:hover {
+  background: var(--card-bg);
+}
+
+.time-display {
+  margin-left: auto;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.preview-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.preview-actions button {
+  flex: 1;
+}
+
+.project-info {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border-radius: 10px;
+}
+
+.info-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.info-value {
+  color: var(--text-primary);
+  font-weight: bold;
+}
+
+/* Action buttons are now positioned inline with content */

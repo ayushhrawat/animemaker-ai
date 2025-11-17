@@ -1,0 +1,205 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  position: relative;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+.login-box {
+  background: #7CB8F7 !important;
+  border-radius: 28px;
+  padding: 50px 45px;
+  box-shadow: 0 10px 40px rgba(33, 83, 139, 0.2) !important;
+  max-width: 460px;
+  width: 100%;
+  z-index: 1;
+  border: 1px solid rgba(124, 184, 247, 0.5) !important;
+  color: #000000 !important;
+}
+
+/* Force light theme on login box - always use light theme regardless of system theme */
+[data-theme="dark"] .login-box {
+  background: #7CB8F7 !important;
+  border: 1px solid rgba(124, 184, 247, 0.5) !important;
+  box-shadow: 0 10px 40px rgba(33, 83, 139, 0.2) !important;
+  color: #000000 !important;
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.logo-section h1 {
+  font-size: 42px;
+  margin-bottom: 12px;
+  font-weight: 800;
+  color: #000000 !important;
+  letter-spacing: -1px;
+}
+
+.logo-section p {
+  font-size: 16px;
+  color: #1a1a1a !important;
+  font-weight: 400;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #000000 !important;
+  font-size: 15px;
+  margin-left: 4px;
+  margin-bottom: 0;
+}
+
+.switch-mode {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--text-secondary);
+}
+
+.google-signin-btn {
+  background: white !important;
+  color: #000000 !important;
+  border: 2px solid #e2e8f0 !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+}
+
+.google-signin-btn:hover {
+  background: #fafafa !important;
+  border-color: #21538B !important;
+  box-shadow: 0 4px 12px rgba(33, 83, 139, 0.15) !important;
+  transform: translateY(-2px);
+}
+
+/* Force light theme on Google sign-in button in dark mode */
+[data-theme="dark"] .google-signin-btn {
+  background: white !important;
+  border-color: #e2e8f0 !important;
+  color: #000000 !important;
+}
+
+[data-theme="dark"] .google-signin-btn:hover {
+  background: #fafafa !important;
+  border-color: #21538B !important;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+  gap: 16px;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0 !important;
+}
+
+.divider-text {
+  color: #1a1a1a !important;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Force light theme on divider in dark mode */
+[data-theme="dark"] .divider-line {
+  background: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .divider-text {
+  color: #1a1a1a !important;
+}
+
+.switch-mode {
+  text-align: center;
+  margin-top: 24px;
+  color: #1a1a1a !important;
+  font-size: 15px;
+}
+
+.switch-mode span {
+  color: #21538B !important;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.switch-mode span:hover {
+  color: #1a4470 !important;
+  text-decoration: underline;
+}
+
+/* Force light theme on switch mode in dark mode */
+[data-theme="dark"] .switch-mode {
+  color: #1a1a1a !important;
+}
+
+[data-theme="dark"] .switch-mode span {
+  color: #21538B !important;
+}
+
+[data-theme="dark"] .switch-mode span:hover {
+  color: #1a4470 !important;
+}
+
+/* Remove white background from form elements to blend with login box */
+.login-form,
+.form-group {
+  background: transparent !important;
+  color: #000000 !important;
+}
+
+.input-field {
+  background: rgba(255, 255, 255, 0.7) !important;
+  color: #000000 !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  backdrop-filter: blur(5px);
+  caret-color: #000000 !important;
+}
+
+.input-field::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Remove white background from form elements in dark mode */
+[data-theme="dark"] .login-form,
+[data-theme="dark"] .form-group {
+  background: transparent !important;
+  color: #000000 !important;
+}
+
+[data-theme="dark"] .input-field {
+  background: rgba(255, 255, 255, 0.7) !important;
+  color: #000000 !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  backdrop-filter: blur(5px);
+  caret-color: #000000 !important;
+}
+
+[data-theme="dark"] .input-field::placeholder {
+  color: #6b7280 !important;
+}

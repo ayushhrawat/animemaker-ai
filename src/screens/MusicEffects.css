@@ -1,0 +1,145 @@
+.music-container {
+  min-height: 100vh;
+  padding: 16px;
+  background: transparent;
+}
+
+.music-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.music-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  max-height: 40vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.music-track {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.music-track:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.music-track.active {
+  border-color: #21538B;
+  background: #21538B;
+  color: white;
+}
+
+.music-track.active h4,
+.music-track.active p {
+  color: white;
+}
+
+.effects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+  max-height: 40vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.effect-card {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.effect-card:hover {
+  transform: scale(1.05);
+  border-color: #21538B;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.effect-card.active {
+  border-color: #21538B;
+  background: #21538B;
+  color: white;
+}
+
+.effect-card.active span,
+.effect-card.active p {
+  color: white;
+}
+
+.volume-control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.volume-control label {
+  font-weight: 600;
+  color: #000000;
+  font-size: 15px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Action buttons are now positioned inline with content */
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .music-container {
+    padding: 12px;
+  }
+  
+  .music-track {
+    padding: 12px 15px;
+  }
+  
+  .effects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 12px;
+  }
+  
+  .effect-card {
+    padding: 15px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-container {
+    padding: 10px;
+  }
+  
+  .music-list {
+    gap: 12px;
+  }
+  
+  .music-track {
+    padding: 10px 12px;
+  }
+  
+  .effects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 10px;
+  }
+  
+  .effect-card {
+    padding: 12px 8px;
+  }
+}

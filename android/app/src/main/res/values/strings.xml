@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">anime-video-maker-ai</string>
+    <string name="title_activity_main">anime-video-maker-ai</string>
+    <string name="package_name">com.animemakerai.com</string>
+    <string name="custom_url_scheme">com.animemakerai.com</string>
+</resources>

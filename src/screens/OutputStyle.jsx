@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage, useAppData } from '../context/AppContext';
 import { translations } from '../utils/translations';
@@ -18,6 +18,8 @@ const OutputStyle = () => {
   );
   
   const [currentVideo, setCurrentVideo] = useState('anime_demo');
+  const [thumbnail, setThumbnail] = useState(null);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     updateAppData('outputStyle', {
@@ -45,6 +47,44 @@ const OutputStyle = () => {
     
     setCurrentVideo(video);
   }, [appData]);
+
+  useEffect(() => {
+    // Generate thumbnail when video source changes
+    if (currentVideo && !thumbnail) {
+      generateThumbnail();
+    }
+  }, [currentVideo]);
+
+  const generateThumbnail = () => {
+    // Create a temporary video element to generate thumbnail
+    const tempVideo = document.createElement('video');
+    tempVideo.src = getVideoSource();
+    tempVideo.muted = true;
+    
+    tempVideo.addEventListener('loadedmetadata', () => {
+      // Seek to a specific time to capture a frame
+      tempVideo.currentTime = 1;
+    });
+    
+    tempVideo.addEventListener('seeked', () => {
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      
+      // Set canvas dimensions
+      canvas.width = 320;
+      canvas.height = 180;
+      
+      // Draw video frame to canvas
+      context.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
+      
+      // Convert to data URL
+      const dataURL = canvas.toDataURL('image/png');
+      setThumbnail(dataURL);
+      
+      // Clean up
+      tempVideo.remove();
+    });
+  };
 
   const resolutions = ['480p', '720p', '1080p', '4K'];
 
@@ -81,12 +121,17 @@ const OutputStyle = () => {
           <div className="preview-section card">
             <h3>{t.preview}</h3>
             <div className="preview-video">
-              <video 
-                src={getVideoSource()}
-                style={{ width: '100%', height: 'auto', maxHeight: '200px', borderRadius: '12px', marginBottom: '15px' }}
-                controls={false}
-                muted
-              />
+              {thumbnail ? (
+                <img 
+                  src={thumbnail} 
+                  alt="Video thumbnail" 
+                  style={{ width: '100%', height: 'auto', maxHeight: '200px', borderRadius: '12px', marginBottom: '15px', objectFit: 'cover' }}
+                />
+              ) : (
+                <div style={{ width: '100%', height: '200px', backgroundColor: '#f0f0f0', borderRadius: '12px', marginBottom: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div>Loading thumbnail...</div>
+                </div>
+              )}
               <div style={{fontSize: '16px', color: 'var(--text-secondary)', textAlign: 'center'}}>
                 {currentVideo === 'anime_demo' ? 'Anime Style Demo' : 'Realistic Style Demo'}
               </div>

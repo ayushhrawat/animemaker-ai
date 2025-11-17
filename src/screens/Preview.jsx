@@ -16,7 +16,9 @@ const Preview = () => {
   const [currentVideo, setCurrentVideo] = useState('anime_demo');
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [thumbnail, setThumbnail] = useState(null);
   const videoRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -39,9 +41,37 @@ const Preview = () => {
     setCurrentVideo(video);
   }, [appData]);
 
+  useEffect(() => {
+    // Generate thumbnail when video source changes
+    if (videoRef.current && !thumbnail) {
+      generateThumbnail();
+    }
+  }, [currentVideo]);
+
+  const generateThumbnail = () => {
+    if (!videoRef.current) return;
+    
+    const video = videoRef.current;
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    
+    // Set canvas dimensions to match video aspect ratio
+    canvas.width = 320;
+    canvas.height = 180;
+    
+    // Draw video frame to canvas
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+    // Convert to data URL
+    const dataURL = canvas.toDataURL('image/png');
+    setThumbnail(dataURL);
+  };
+
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
       setDuration(videoRef.current.duration);
+      // Generate thumbnail after metadata is loaded
+      setTimeout(generateThumbnail, 100);
     }
   };
 
@@ -96,6 +126,8 @@ const Preview = () => {
 
   const handleVideoCanPlay = () => {
     // Optional: Hide loading indicator
+    // Generate thumbnail when video can play
+    setTimeout(generateThumbnail, 100);
   };
 
   return (
@@ -111,19 +143,27 @@ const Preview = () => {
           <div className="player-screen">
             <div className="anime-preview">
               <div className="preview-placeholder">
-                <video 
-                  ref={videoRef}
-                  src={getVideoSource()}
-                  style={{ width: '100%', height: 'auto', maxHeight: '300px', borderRadius: '12px' }}
-                  onPlay={() => setIsPlaying(true)}
-                  onPause={() => setIsPlaying(false)}
-                  onEnded={() => setIsPlaying(false)}
-                  onLoadedMetadata={handleLoadedMetadata}
-                  onTimeUpdate={handleTimeUpdate}
-                  onError={handleVideoError}
-                  onLoadStart={handleVideoLoadStart}
-                  onCanPlay={handleVideoCanPlay}
-                />
+                {thumbnail ? (
+                  <img 
+                    src={thumbnail} 
+                    alt="Video thumbnail" 
+                    style={{ width: '100%', height: 'auto', maxHeight: '300px', borderRadius: '12px', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <video 
+                    ref={videoRef}
+                    src={getVideoSource()}
+                    style={{ width: '100%', height: 'auto', maxHeight: '300px', borderRadius: '12px', display: 'none' }}
+                    onPlay={() => setIsPlaying(true)}
+                    onPause={() => setIsPlaying(false)}
+                    onEnded={() => setIsPlaying(false)}
+                    onLoadedMetadata={handleLoadedMetadata}
+                    onTimeUpdate={handleTimeUpdate}
+                    onError={handleVideoError}
+                    onLoadStart={handleVideoLoadStart}
+                    onCanPlay={handleVideoCanPlay}
+                  />
+                )}
                 <div style={{marginTop: '15px', fontSize: '16px', color: 'var(--text-secondary)'}}>
                   {currentVideo === 'anime_demo' ? 'Anime Style Demo' : 'Realistic Style Demo'}
                 </div>

@@ -80,7 +80,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-box fade-in">
         <div className="logo-section">
-          <h1 style={{fontFamily: "'Montserrat', sans-serif", fontSize: '42px', color: 'var(--text-primary)', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px'}}>AnimeMaker AI</h1>
+          <h1 className="login-title">AnimeMaker AI</h1>
           <p style={{color: 'var(--text-secondary)', fontSize: '16px'}}>{t.welcome}</p>
         </div>
 

@@ -361,7 +361,6 @@ const CharacterDesign = () => {
                     style={{ zIndex: partTypes.indexOf(partType) }}
                     onError={(e) => {
                       console.error('Error loading character part image:', e);
-                      // Optional: Show a fallback image or placeholder
                       e.target.style.display = 'none';
                     }}
                   />
@@ -405,7 +404,6 @@ const CharacterDesign = () => {
                     className="part-image" 
                     onError={(e) => {
                       console.error('Error loading character part image:', e);
-                      // Optional: Show a fallback image or placeholder
                       e.target.style.display = 'none';
                     }}
                   />
@@ -417,10 +415,9 @@ const CharacterDesign = () => {
         </div>
 
         {/* Next Button */}
-        <div style={{textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
+        <div className="action-buttons">
           <button 
             className="btn btn-primary"
-            style={{padding: '10px 20px', fontSize: '14px'}}
             onClick={handleNext}
           >
             {t.next} →

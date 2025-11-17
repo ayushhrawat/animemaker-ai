@@ -247,10 +247,9 @@ const MusicEffects = () => {
           </div>
         </div>
 
-        <div style={{textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
+        <div className="action-buttons">
           <button 
             className="btn btn-primary"
-            style={{padding: '10px 20px', fontSize: '14px'}}
             onClick={() => navigate('/preview')}
           >
             {t.next} →

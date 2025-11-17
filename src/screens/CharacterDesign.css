@@ -19,16 +19,19 @@
   z-index: 10;
 }
 
-.character-preview-card {
+.character-preview {
   background: linear-gradient(135deg, #7CB8F7 0%, #5a9de0 100%);
   border: 1px solid rgba(124, 184, 247, 0.5);
   box-shadow: 0 4px 16px rgba(33, 83, 139, 0.15);
   position: relative;
   overflow: hidden;
   border-radius: 12px;
+  padding: 15px; /* Reduced padding */
+  max-width: 200px; /* Limit overall width */
+  margin: 0 auto; /* Center the entire box */
 }
 
-.character-preview-card::before {
+.character-preview::before {
   content: '';
   position: absolute;
   top: -50%;
@@ -39,32 +42,26 @@
   transform: rotate(30deg);
 }
 
-.character-preview {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
 .character-preview h3 {
-  margin-bottom: 16px;
-  color: var(--text-primary);
-  font-size: 18px;
+  margin-bottom: 12px; /* Reduced margin */
+  color: white;
+  font-size: 16px; /* Slightly smaller font */
+  text-align: center;
 }
 
 .character-display {
   position: relative;
   width: 100%;
-  max-width: 100px; /* Even more compact */
-  height: 60px; /* Much smaller for compact display */
+  max-width: 80px; /* Even more compact */
+  height: 50px; /* Much smaller for compact display */
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-secondary);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
   overflow: hidden;
-  margin: 0 auto; /* Center the preview */
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
 }
 
 .character-part {
@@ -82,33 +79,35 @@
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .character-preview {
-    padding: 16px;
+    padding: 12px;
+    max-width: 160px;
   }
   
   .character-preview h3 {
-    font-size: 16px;
-    margin-bottom: 14px;
+    font-size: 14px;
+    margin-bottom: 10px;
   }
   
   .character-display {
-    max-width: 80px;
-    height: 50px; /* Smaller on tablets */
+    max-width: 70px;
+    height: 40px;
   }
 }
 
 @media (max-width: 480px) {
   .character-preview {
-    padding: 12px;
+    padding: 10px;
+    max-width: 140px;
   }
   
   .character-preview h3 {
-    font-size: 15px;
-    margin-bottom: 12px;
+    font-size: 13px;
+    margin-bottom: 8px;
   }
   
   .character-display {
-    max-width: 70px;
-    height: 40px; /* Even smaller on mobile */
+    max-width: 60px;
+    height: 35px;
   }
 }
 

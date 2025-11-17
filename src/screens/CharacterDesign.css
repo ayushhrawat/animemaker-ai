@@ -26,9 +26,9 @@
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  padding: 15px; /* Reduced padding */
-  max-width: 200px; /* Limit overall width */
-  margin: 0 auto; /* Center the entire box */
+  padding: 8px; /* Much smaller padding to reduce height */
+  max-width: 200px;
+  margin: 0 auto;
 }
 
 .character-preview::before {
@@ -43,17 +43,17 @@
 }
 
 .character-preview h3 {
-  margin-bottom: 12px; /* Reduced margin */
+  margin-bottom: 6px; /* Much smaller margin */
   color: white;
-  font-size: 16px; /* Slightly smaller font */
+  font-size: 14px;
   text-align: center;
 }
 
 .character-display {
   position: relative;
   width: 100%;
-  max-width: 80px; /* Even more compact */
-  height: 50px; /* Much smaller for compact display */
+  max-width: 80px;
+  height: 30px; /* Reduced to one-third of previous height (50px -> 30px) */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,35 +79,35 @@
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .character-preview {
-    padding: 12px;
+    padding: 6px;
     max-width: 160px;
   }
   
   .character-preview h3 {
-    font-size: 14px;
-    margin-bottom: 10px;
+    font-size: 12px;
+    margin-bottom: 4px;
   }
   
   .character-display {
     max-width: 70px;
-    height: 40px;
+    height: 25px; /* Reduced to one-third of previous height */
   }
 }
 
 @media (max-width: 480px) {
   .character-preview {
-    padding: 10px;
+    padding: 5px;
     max-width: 140px;
   }
   
   .character-preview h3 {
-    font-size: 13px;
-    margin-bottom: 8px;
+    font-size: 11px;
+    margin-bottom: 3px;
   }
   
   .character-display {
     max-width: 60px;
-    height: 35px;
+    height: 20px; /* Reduced to one-third of previous height */
   }
 }
 

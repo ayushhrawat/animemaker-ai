@@ -84,6 +84,20 @@ const Preview = () => {
     return currentVideo === 'anime_demo' ? animeDemoVideo : realisticDemoVideo;
   };
 
+  const handleVideoError = (e) => {
+    console.error('Error loading video:', e);
+    // Show an error message to the user
+    alert('Could not load the video. Please check your internet connection and try again.');
+  };
+
+  const handleVideoLoadStart = () => {
+    // Optional: Show loading indicator
+  };
+
+  const handleVideoCanPlay = () => {
+    // Optional: Hide loading indicator
+  };
+
   return (
     <div className="preview-container">
       <header className="screen-header">
@@ -106,6 +120,9 @@ const Preview = () => {
                   onEnded={() => setIsPlaying(false)}
                   onLoadedMetadata={handleLoadedMetadata}
                   onTimeUpdate={handleTimeUpdate}
+                  onError={handleVideoError}
+                  onLoadStart={handleVideoLoadStart}
+                  onCanPlay={handleVideoCanPlay}
                 />
                 <div style={{marginTop: '15px', fontSize: '16px', color: 'var(--text-secondary)'}}>
                   {currentVideo === 'anime_demo' ? 'Anime Style Demo' : 'Realistic Style Demo'}

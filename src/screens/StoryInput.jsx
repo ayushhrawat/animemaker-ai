@@ -4,6 +4,10 @@ import { useLanguage, useAppData } from '../context/AppContext';
 import { translations } from '../utils/translations';
 import './StoryInput.css';
 
+import animePreview from '../images/story-previews/anime.jpg';
+import cartoonPreview from '../images/story-previews/cartoon.jpg';
+import realisticPreview from '../images/story-previews/realistic.jpg';
+
 const StoryInput = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
@@ -19,15 +23,18 @@ const StoryInput = () => {
   const storyStyles = [
     { 
       id: 'anime', 
-      name: 'Anime Style'
+      name: 'Anime Style',
+      image: animePreview
     },
     { 
       id: 'cartoon', 
-      name: 'Cartoon Style'
+      name: 'Cartoon Style',
+      image: cartoonPreview
     },
     { 
       id: 'realistic', 
-      name: 'Realistic'
+      name: 'Realistic',
+      image: realisticPreview
     }
   ];
 
@@ -71,20 +78,33 @@ const StoryInput = () => {
                   <div className="style-image-container">
                     <div className="style-image-wrapper">
                       <img 
-                        src={`/src/images/story-previews/${style.id}.jpg`} 
+                        src={style.image} 
                         alt={style.name} 
                         className="style-image"
                         onError={(e) => {
-                          e.target.src = `/src/images/story-previews/${style.id}.png`;
-                          e.target.onerror = () => {
-                            e.target.style.display = 'none';
-                            const placeholder = document.createElement('div');
-                            placeholder.className = 'style-placeholder-fallback';
-                            placeholder.textContent = style.name.charAt(0);
-                            placeholder.style.backgroundColor = style.id === 'anime' ? '#FF6B6B' : 
-                                                              style.id === 'cartoon' ? '#4ECDC4' : '#45B7D1';
-                            e.target.parentNode.appendChild(placeholder);
-                          };
+                          console.error('Error loading image:', e);
+                          e.target.style.display = 'none';
+                          // Create a fallback element
+                          const container = e.target.parentNode;
+                          const placeholder = document.createElement('div');
+                          placeholder.className = 'style-placeholder-fallback';
+                          placeholder.textContent = style.name.charAt(0);
+                          placeholder.style.backgroundColor = style.id === 'anime' ? '#FF6B6B' : 
+                                                      style.id === 'cartoon' ? '#4ECDC4' : '#45B7D1';
+                          placeholder.style.width = '100%';
+                          placeholder.style.height = '100%';
+                          placeholder.style.display = 'flex';
+                          placeholder.style.alignItems = 'center';
+                          placeholder.style.justifyContent = 'center';
+                          placeholder.style.fontSize = '24px';
+                          placeholder.style.fontWeight = 'bold';
+                          placeholder.style.color = 'white';
+                          placeholder.style.borderRadius = '8px';
+                          container.appendChild(placeholder);
+                        }}
+                        onLoad={(e) => {
+                          // Make sure the image is visible when loaded
+                          e.target.style.display = 'block';
                         }}
                       />
                     </div>

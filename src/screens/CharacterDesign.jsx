@@ -316,14 +316,30 @@ const CharacterDesign = () => {
               className={`category-option ${activeCategory === 'male' ? 'active' : ''}`}
               onClick={() => toggleCategory('male')}
             >
-              <img src={maleIcon} alt="Male" className="category-icon" />
+              <img 
+                src={maleIcon} 
+                alt="Male" 
+                className="category-icon" 
+                onError={(e) => {
+                  console.error('Error loading male icon:', e);
+                  e.target.style.display = 'none';
+                }}
+              />
               <span>Male</span>
             </div>
             <div 
               className={`category-option ${activeCategory === 'female' ? 'active' : ''}`}
               onClick={() => toggleCategory('female')}
             >
-              <img src={femaleIcon} alt="Female" className="category-icon" />
+              <img 
+                src={femaleIcon} 
+                alt="Female" 
+                className="category-icon" 
+                onError={(e) => {
+                  console.error('Error loading female icon:', e);
+                  e.target.style.display = 'none';
+                }}
+              />
               <span>Female</span>
             </div>
           </div>
@@ -334,15 +350,23 @@ const CharacterDesign = () => {
           <h3>Character Preview</h3>
           <div className="preview-container">
             <div className="character-display">
-              {partTypes.map(partType => (
-                <img 
-                  key={partType}
-                  src={getSelectedPartImage(activeCategory, partType)}
-                  alt={partType}
-                  className="character-part"
-                  style={{ zIndex: partTypes.indexOf(partType) }}
-                />
-              ))}
+              {partTypes.map(partType => {
+                const imageSrc = getSelectedPartImage(activeCategory, partType);
+                return imageSrc ? (
+                  <img 
+                    key={partType}
+                    src={imageSrc}
+                    alt={partType}
+                    className="character-part"
+                    style={{ zIndex: partTypes.indexOf(partType) }}
+                    onError={(e) => {
+                      console.error('Error loading character part image:', e);
+                      // Optional: Show a fallback image or placeholder
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                ) : null;
+              })}
             </div>
           </div>
         </div>
@@ -375,7 +399,16 @@ const CharacterDesign = () => {
                   className={`part-option ${currentCharacter.selectedParts[activeCategory][activePartType] === part.id ? 'active' : ''}`}
                   onClick={() => selectPart(activePartType, part.id)}
                 >
-                  <img src={part.image} alt={part.name} className="part-image" />
+                  <img 
+                    src={part.image} 
+                    alt={part.name} 
+                    className="part-image" 
+                    onError={(e) => {
+                      console.error('Error loading character part image:', e);
+                      // Optional: Show a fallback image or placeholder
+                      e.target.style.display = 'none';
+                    }}
+                  />
                   <span className="part-name">{part.name}</span>
                 </div>
               ))}

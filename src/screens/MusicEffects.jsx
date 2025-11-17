@@ -4,6 +4,18 @@ import { useLanguage, useAppData } from '../context/AppContext';
 import { translations } from '../utils/translations';
 import './MusicEffects.css';
 
+import epicAdventure from '../music/epic_adventure.mp3';
+import gentleBreeze from '../music/gentle_breeze.mp3';
+import dramaticTension from '../music/dramatic_tension.mp3';
+import happyMoments from '../music/happy_moments.mp3';
+
+import explosionSound from '../sound-effects/explosion.mp3';
+import swordSound from '../sound-effects/sword.mp3';
+import waterSound from '../sound-effects/water.mp3';
+import windSound from '../sound-effects/wind.mp3';
+import fireSound from '../sound-effects/fire.mp3';
+import lightningSound from '../sound-effects/lightning.mp3';
+
 const MusicEffects = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
@@ -48,22 +60,23 @@ const MusicEffects = () => {
   }, []);
 
   const musicTracks = [
-    { name: 'Epic Adventure', mood: '⚔️ Action', duration: '3:45', file: '../music/epic_adventure.mp3' },
-    { name: 'Gentle Breeze', mood: '🌸 Calm', duration: '2:30', file: '../music/gentle_breeze.mp3' },
-    { name: 'Dramatic Tension', mood: '😰 Suspense', duration: '4:15', file: '../music/dramatic_tension.mp3' },
-    { name: 'Happy Moments', mood: '😊 Upbeat', duration: '3:00', file: '../music/happy_moments.mp3' },
+    { name: 'Epic Adventure', mood: '⚔️ Action', duration: '3:45', file: epicAdventure },
+    { name: 'Gentle Breeze', mood: '🌸 Calm', duration: '2:30', file: gentleBreeze },
+    { name: 'Dramatic Tension', mood: '😰 Suspense', duration: '4:15', file: dramaticTension },
+    { name: 'Happy Moments', mood: '😊 Upbeat', duration: '3:00', file: happyMoments },
   ];
 
   const soundEffects = [
-    { name: 'Explosion', emoji: '💥', file: '../sound-effects/explosion.mp3' },
-    { name: 'Sword Clash', emoji: '⚔️', file: '../sound-effects/sword.mp3' },
-    { name: 'Water', emoji: '🌊', file: '../sound-effects/water.mp3' },
-    { name: 'Wind', emoji: '🌬️', file: '../sound-effects/wind.mp3' },
-    { name: 'Fire', emoji: '🔥', file: '../sound-effects/fire.mp3' },
-    { name: 'Lightning', emoji: '⚡', file: '../sound-effects/lightning.mp3' }
+    { name: 'Explosion', emoji: '💥', file: explosionSound },
+    { name: 'Sword Clash', emoji: '⚔️', file: swordSound },
+    { name: 'Water', emoji: '🌊', file: waterSound },
+    { name: 'Wind', emoji: '🌬️', file: windSound },
+    { name: 'Fire', emoji: '🔥', file: fireSound },
+    { name: 'Lightning', emoji: '⚡', file: lightningSound }
   ];
 
   const playMusicSample = (musicFile, trackName) => {
+    // Stop any currently playing audio
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current = null;
@@ -75,24 +88,42 @@ const MusicEffects = () => {
       const audio = new Audio(musicFile);
       audioRef.current = audio;
       
-      setIsPlaying(true);
-      setCurrentTrack(trackName);
+      // Set up event listeners before playing
+      audio.addEventListener('play', () => {
+        setIsPlaying(true);
+        setCurrentTrack(trackName);
+      });
       
-      audio.play().catch(error => {
-        console.error('Error playing audio:', error);
-        alert('Could not play the audio sample. Please make sure the audio files are placed in the src/music folder.');
+      audio.addEventListener('ended', () => {
+        audioRef.current = null;
         setIsPlaying(false);
         setCurrentTrack(null);
       });
       
-      audio.onended = () => {
+      audio.addEventListener('error', (error) => {
+        console.error('Error playing audio:', error);
+        alert('Could not play the audio sample. Please make sure the audio files are properly loaded.');
         audioRef.current = null;
         setIsPlaying(false);
         setCurrentTrack(null);
-      };
+      });
+      
+      // Play the audio
+      const playPromise = audio.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error('Error playing audio:', error);
+          alert('Could not play the audio sample. Please make sure the audio files are properly loaded.');
+          audioRef.current = null;
+          setIsPlaying(false);
+          setCurrentTrack(null);
+        });
+      }
     } catch (error) {
       console.error('Error creating audio:', error);
-      alert('Could not play the audio sample. Please make sure the audio files are placed in the src/music folder.');
+      alert('Could not play the audio sample. Please make sure the audio files are properly loaded.');
+      audioRef.current = null;
       setIsPlaying(false);
       setCurrentTrack(null);
     }
@@ -114,6 +145,7 @@ const MusicEffects = () => {
   };
 
   const playSoundEffect = (soundFile, effectName) => {
+    // Stop any currently playing audio
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current = null;
@@ -130,22 +162,33 @@ const MusicEffects = () => {
       const audio = new Audio(soundFile);
       audioRef.current = audio;
       
-      audio.play().catch(error => {
+      // Set up event listeners before playing
+      audio.addEventListener('ended', () => {
+        audioRef.current = null;
+        setActiveSoundEffect(null);
+      });
+      
+      audio.addEventListener('error', (error) => {
         console.error('Error playing sound effect:', error);
-        alert('Could not play the sound effect. Please make sure the audio files are placed in the src/sound-effects folder.');
+        alert('Could not play the sound effect. Please make sure the audio files are properly loaded.');
         setActiveSoundEffect(null);
         audioRef.current = null;
       });
       
-      audio.loop = false;
+      // Play the audio
+      const playPromise = audio.play();
       
-      audio.onended = () => {
-        audioRef.current = null;
-        setActiveSoundEffect(null);
-      };
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error('Error playing sound effect:', error);
+          alert('Could not play the sound effect. Please make sure the audio files are properly loaded.');
+          setActiveSoundEffect(null);
+          audioRef.current = null;
+        });
+      }
     } catch (error) {
       console.error('Error creating sound effect:', error);
-      alert('Could not play the sound effect. Please make sure the audio files are placed in the src/sound-effects folder.');
+      alert('Could not play the sound effect. Please make sure the audio files are properly loaded.');
       setActiveSoundEffect(null);
       audioRef.current = null;
     }

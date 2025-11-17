@@ -56,8 +56,8 @@
 .character-display {
   position: relative;
   width: 100%;
-  max-width: 150px; /* Limit width for compact display */
-  height: 100px; /* Reduced size for compact display */
+  max-width: 100px; /* Even more compact */
+  height: 60px; /* Much smaller for compact display */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,8 +91,8 @@
   }
   
   .character-display {
-    max-width: 120px;
-    height: 80px; /* Smaller on tablets */
+    max-width: 80px;
+    height: 50px; /* Smaller on tablets */
   }
 }
 
@@ -107,8 +107,8 @@
   }
   
   .character-display {
-    max-width: 100px;
-    height: 70px; /* Even smaller on mobile */
+    max-width: 70px;
+    height: 40px; /* Even smaller on mobile */
   }
 }
 

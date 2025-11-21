@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage, useAppData } from '../context/AppContext';
 import { translations } from '../utils/translations';
+import logoImage from '../images/logo/logo.png'; // Import the logo as a module
 import './Home.css';
 
 const Home = () => {
@@ -37,7 +38,10 @@ const Home = () => {
     <div className="home-container">
       <header className="home-header">
         <div></div>
-        <h1 style={{fontFamily: "'Montserrat', sans-serif", fontSize: '28px', margin: 0, fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px'}}>AnimeMaker AI</h1>
+        <div className="logo-section">
+          <img src={logoImage} alt="AnimeMaker AI Logo" className="app-logo" />
+          <h1 style={{fontFamily: "'Montserrat', sans-serif", fontSize: '28px', margin: 0, fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px'}}>AnimeMaker AI</h1>
+        </div>
         <div></div>
       </header>
 

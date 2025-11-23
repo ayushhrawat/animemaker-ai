@@ -6,6 +6,7 @@
   background: transparent;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .home-header {
@@ -94,7 +95,7 @@
 }
 
 .features-section.compact {
-  margin-bottom: 0;
+  margin-bottom: 20px;
 }
 
 .features-section h3 {
